@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>View Operation Schedule</title>
+  <link rel="stylesheet" href="../styles.css" />
+</head>
+<body>
+  <header>
+    <div class="container">
+      <h1>Operation Scheduler</h1>
+    </div>
+  </header>
+
+  <nav>
+    <ul>
+      <li><a href="#" id="logout-link">Logout</a></li>
+    
+        <li><a href="../admin/add-schedule.html">Add Schedule</a></li>
+    </ul>
+  </nav>
+
+  <main class="container">
+    <div class="card">
+      <h2>Upcoming Operations</h2>
+      <div id="loading-message">Loading schedules...</div>
+      <div id="error-message" class="alert alert-danger hidden"></div>
+      
+      <table class="table" id="schedule-table">
+        <thead>
+          <tr>
+            <th>Date & Time</th>
+            <th>Patient</th>
+            <th>Doctor</th>
+            <th>OT ID</th>
+            <th>Anesthesia</th>
+            <th>Notes</th>
+          </tr>
+        </thead>
+        <tbody id="schedule-body">
+          <!-- Schedules will be inserted here by JavaScript -->
+        </tbody>
+      </table>
+    </div>
+  </main>
+
+  <script type="module">
+    import { getAuth, signOut } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-auth.js";
+    import { app } from "../js/firebase.js"; 
+
+    const auth = getAuth(app);
+
+    document.getElementById("logout-link").addEventListener("click", async (e) => {
+      e.preventDefault();
+      try {
+        await signOut(auth);
+        window.location.href = "../auth/login.html";
+      } catch (error) {
+        console.error("Logout failed:", error);
+        alert("Error during logout");
+      }
+    });
+  </script>
+  <script type="module" src="./view-schedule.js"></script>
+
+</body>
+</html>
