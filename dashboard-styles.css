@@ -15,6 +15,8 @@
   --shadow-color: rgba(0, 0, 0, 0.05);
   --success-color: #28a745;
   --error-color: #dc3545;
+  --danger-color: #dc3545;
+  --danger-hover: #c82333;
 }
 
 /* --- General & Body Styles --- */
@@ -30,7 +32,7 @@ body {
   color: var(--text-primary);
   display: flex;
   height: 100vh;
-  overflow: hidden;
+  overflow: hidden; 
 }
 
 /* --- Main Layout: Sidebar + Content --- */
@@ -166,7 +168,7 @@ textarea {
 }
 
 .form-actions {
-  grid-column: 1 / -1; 
+  grid-column: 1 / -1;
   margin-top: 1rem;
   text-align: right;
 }
@@ -188,9 +190,26 @@ textarea {
   transform: translateY(-2px);
 }
 
+.btn-danger {
+    background-color: var(--danger-color);
+}
+
+.btn-danger:hover {
+    background-color: var(--danger-hover);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-color);
+    color: #fff;
+}
+.btn-secondary:hover {
+    background-color: #5a6268;
+}
+
+
 /* --- Table Styles --- */
 .table-container {
-  overflow-x: auto; 
+  overflow-x: auto;
 }
 
 .table {
@@ -216,6 +235,38 @@ textarea {
 .table tbody tr:hover {
   background-color: #f8f9fa;
 }
+
+.actions-cell {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.btn-action {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0.5rem;
+    border-radius: 6px;
+    transition: background-color 0.2s ease;
+}
+
+.btn-action svg {
+    stroke: var(--text-secondary);
+    transition: stroke 0.2s ease;
+}
+
+.btn-action:hover {
+    background-color: #e9ecef;
+}
+
+.btn-modify:hover svg {
+    stroke: var(--primary-color);
+}
+
+.btn-delete:hover svg {
+    stroke: var(--danger-color);
+}
+
 
 /* --- Alerts & Messages --- */
 .alert {
@@ -246,6 +297,51 @@ textarea {
   padding: 2rem;
   color: var(--text-secondary);
 }
+
+/* --- Confirmation Modal --- */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+}
+
+.modal-overlay.hidden {
+    display: none;
+}
+
+.modal-content {
+    background: #fff;
+    padding: 2rem;
+    border-radius: 12px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+    width: 90%;
+    max-width: 400px;
+    text-align: center;
+}
+
+.modal-content h3 {
+    margin-top: 0;
+    margin-bottom: 1rem;
+}
+
+.modal-content p {
+    margin-bottom: 2rem;
+    color: var(--text-secondary);
+}
+
+.modal-actions {
+    display: flex;
+    justify-content: center;
+    gap: 1rem;
+}
+
 
 /* --- Responsive Design --- */
 @media (max-width: 768px) {
@@ -280,7 +376,7 @@ textarea {
     margin-right: 0;
   }
   .nav-text {
-    display: none;
+    display: none; 
   }
   .main-content {
     padding: 1.5rem;
