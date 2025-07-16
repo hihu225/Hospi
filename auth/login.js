@@ -26,8 +26,26 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
       window.location.href = '../user/view-schedule.html';
     }
   } catch (error) {
-    errorMessage.textContent = error.message;
+    const friendlyMessage = getFriendlyLoginError(error.code);
+errorMessage.textContent = friendlyMessage;
+
     errorMessage.classList.remove('hidden');
     console.error('Login failed:', error);
   }
 });
+function getFriendlyLoginError(errorCode) {
+  switch (errorCode) {
+    case "auth/user-not-found":
+      return "No account found with this email.";
+    case "auth/wrong-password":
+      return "Incorrect password. Please try again.";
+    case "auth/invalid-email":
+      return "Please enter a valid email address.";
+    case "auth/too-many-requests":
+      return "Too many failed attempts. Please try again later.";
+    case "auth/internal-error":
+      return "Something went wrong. Please try again.";
+    default:
+      return "Login failed. Please check your credentials.";
+  }
+}

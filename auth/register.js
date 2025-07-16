@@ -45,8 +45,25 @@ document.getElementById('register-form').addEventListener('submit', async (e) =>
     // Clear form
     document.getElementById('register-form').reset();
   } catch (error) {
-    errorMessage.textContent = error.message;
+    const friendlyMessage = getFriendlyErrorMessage(error.code);
+errorMessage.textContent = friendlyMessage;
     errorMessage.classList.remove('hidden');
     logAction(`Registration failed: ${error.message}`);
   }
 });
+function getFriendlyErrorMessage(errorCode) {
+  switch (errorCode) {
+    case "auth/email-already-in-use":
+      return "This email is already registered. Try logging in instead.";
+    case "auth/invalid-email":
+      return "Please enter a valid email address.";
+    case "auth/weak-password":
+      return "Password must be at least 6 characters.";
+    case "auth/missing-password":
+      return "Please enter a password.";
+    case "auth/internal-error":
+      return "Something went wrong. Please try again later.";
+    default:
+      return "Registration failed. Please try again.";
+  }
+}
