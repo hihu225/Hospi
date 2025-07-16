@@ -8,7 +8,7 @@ import {
   getDocs
 } from "https://www.gstatic.com/firebasejs/10.12.0/firebase-firestore.js";
 
-// ✅ Check if user is logged in
+
 console.log("[Auth] Checking if user is logged in...");
 checkAuth();
 

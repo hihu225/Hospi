@@ -4,46 +4,46 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Register - Operation Scheduler</title>
-  <link rel="stylesheet" href="../styles.css">
+  <!-- Link to the new stylesheet -->
+  <link rel="stylesheet" href="auth-styles.css">
 </head>
 <body>
-  <header>
-    <div class="container">
-      <h1>Operation Scheduler - Register</h1>
-    </div>
-  </header>
 
-  <main class="container">
-    <div class="card">
-      <h2>Register</h2>
+  <div class="auth-container">
+    <header class="auth-header">
+      <h1>Operation Scheduler</h1>
+    </header>
+
+    <main class="auth-content">
+      <h2>Create Your Account</h2>
       <div id="error-message" class="alert alert-danger hidden"></div>
       <div id="success-message" class="alert alert-success hidden"></div>
       
       <form id="register-form">
         <div class="form-group">
-          <label for="email">Email</label>
-          <input type="email" id="email" required>
+          <label for="name">Full Name</label>
+          <input type="text" id="name" required placeholder="e.g., Dr. Jane Doe">
+        </div>
+
+        <div class="form-group">
+          <label for="email">Email Address</label>
+          <input type="email" id="email" required placeholder="you@example.com">
         </div>
         
         <div class="form-group">
-          <label for="password">Password (min 6 characters)</label>
-          <input type="password" id="password" minlength="6" required>
+          <label for="password">Password (min. 6 characters)</label>
+          <input type="password" id="password" minlength="6" required placeholder="••••••••">
         </div>
         
         <div class="form-group">
           <label for="confirm-password">Confirm Password</label>
-          <input type="password" id="confirm-password" minlength="6" required>
+          <input type="password" id="confirm-password" minlength="6" required placeholder="••••••••">
         </div>
         
         <div class="form-group">
-          <label for="name">Full Name</label>
-          <input type="text" id="name" required>
-        </div>
-        
-        <div class="form-group">
-          <label for="role">Role</label>
+          <label for="role">Your Role</label>
           <select id="role" required>
-            <option value="">Select role</option>
+            <option value="" disabled selected>Select your role</option>
             <option value="doctor">Doctor</option>
             <option value="staff">Staff</option>
           </select>
@@ -52,10 +52,12 @@
         <button type="submit" class="btn">Register</button>
       </form>
       
-      <p>Already have an account? <a href="login.html">Login here</a></p>
-    </div>
-  </main>
- <script type="importmap">
+      <p class="auth-footer">Already have an account? <a href="login.html">Login here</a></p>
+    </main>
+  </div>
+
+  <!-- Firebase Scripts -->
+  <script type="importmap">
     {
       "imports": {
         "firebase/app": "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js",
@@ -64,7 +66,7 @@
       }
     }
   </script>
-
   <script type="module" src="register.js"></script>
+
 </body>
 </html>
