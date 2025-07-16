@@ -17,8 +17,14 @@ const doctorNameInput = document.getElementById('doctor-name');
 const dateInput = document.getElementById('date');
 const timeInput = document.getElementById('time');
 const otIdInput = document.getElementById('ot-id');
-const anesthesiaInput = document.getElementById('anesthesia');
-const notesInput = document.getElementById('notes');
+const assistantSurgeonInput = document.getElementById('assistant-surgeon');
+const anesthesiaTypeInput = document.getElementById('anesthesia-type');
+const anesthesiologistNameInput = document.getElementById('anesthesiologist-name');
+const nursesInput = document.getElementById('nurses');
+const preOpEventsInput = document.getElementById('pre-op-events');
+const postOpEventsInput = document.getElementById('post-op-events');
+const doctorRemarksInput = document.getElementById('doctor-remarks');
+const specialRequirementsInput = document.getElementById('special-requirements');
 
 let scheduleId = null;
 
@@ -51,8 +57,14 @@ async function loadScheduleData() {
             dateInput.value = data.date || '';
             timeInput.value = data.time || '';
             otIdInput.value = data.otId || '';
-            anesthesiaInput.value = data.anesthesia || '';
-            notesInput.value = data.notes || '';
+            assistantSurgeonInput.value = data.assistantSurgeon || '';
+            anesthesiaTypeInput.value = data.anesthesiaType || '';
+            anesthesiologistNameInput.value = data.anesthesiologistName || '';
+            nursesInput.value = data.nurses || '';
+            preOpEventsInput.value = data.preOpEvents || '';
+            postOpEventsInput.value = data.postOpEvents || '';
+            doctorRemarksInput.value = data.doctorRemarks || '';
+            specialRequirementsInput.value = data.specialRequirements || '';
 
             // Show form and hide loading message
             scheduleForm.classList.remove('hidden');
@@ -78,7 +90,6 @@ scheduleForm.addEventListener('submit', async (e) => {
         return;
     }
     
-    // Hide previous messages
     errorMessage.classList.add('hidden');
     successMessage.classList.add('hidden');
 
@@ -88,9 +99,15 @@ scheduleForm.addEventListener('submit', async (e) => {
         date: dateInput.value,
         time: timeInput.value,
         otId: otIdInput.value,
-        anesthesia: anesthesiaInput.value,
-        notes: notesInput.value,
-        updatedAt: serverTimestamp() // Add an 'updatedAt' timestamp
+        assistantSurgeon: assistantSurgeonInput.value,
+        anesthesiaType: anesthesiaTypeInput.value,
+        anesthesiologistName: anesthesiologistNameInput.value,
+        nurses: nursesInput.value,
+        preOpEvents: preOpEventsInput.value,
+        postOpEvents: postOpEventsInput.value,
+        doctorRemarks: doctorRemarksInput.value,
+        specialRequirements: specialRequirementsInput.value,
+        updatedAt: serverTimestamp()
     };
 
     try {
@@ -101,7 +118,6 @@ scheduleForm.addEventListener('submit', async (e) => {
         showSuccess("Schedule updated successfully! Redirecting...");
         logAction(`Updated schedule: ${scheduleId}`);
 
-        // Redirect back to the view page after a short delay
         setTimeout(() => {
             window.location.href = '../user/view-schedule.html';
         }, 2000);
@@ -113,7 +129,6 @@ scheduleForm.addEventListener('submit', async (e) => {
     }
 });
 
-// Utility functions to show messages
 function showError(message) {
     loadingMessage.style.display = 'none';
     errorMessage.textContent = message;
@@ -125,7 +140,6 @@ function showSuccess(message) {
     successMessage.classList.remove('hidden');
 }
 
-// Logout functionality
 document.getElementById('logout-link').addEventListener('click', (e) => {
     e.preventDefault();
     auth.signOut().then(() => {
@@ -134,7 +148,6 @@ document.getElementById('logout-link').addEventListener('click', (e) => {
     });
 });
 
-// Initial load
 document.addEventListener('DOMContentLoaded', () => {
     console.log("[DOM] Document loaded. Calling loadScheduleData()...");
     loadScheduleData();
